@@ -1,0 +1,35 @@
+{% extends 'music/base.html' %}
+
+{% block body %} 
+
+	<ul>
+		<div class='container'>
+			<div class='row'>
+	{% for album in object_list %}
+				<div class='col-md-4'>
+					<div class='panel'>
+						<div class='panel-body' class='panel-default'>
+							<a href='{% url "music:details" album.pk %}'>
+								<img src='{{ album.album_logo.url }}' class='img-responsive'>
+							</a>
+							<h1>{{ album.album_artist }}</h1>
+							<h3>{{ album.album_title }}</h3>
+							<form action='{% url "music:details" album.id %}' >	
+								<button type="submit" class="btn btn-primary">View details</button>
+							</form>	
+							<form action="{% url 'music:album-delete' album.id %}" method='post'>
+								{% csrf_token %}
+								<input type='hidden' name='album_id' value='{{ album.id }}'>
+								<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
+							</form>
+							<button type="button" class="btn btn-default"><span class='glyphicon  glyphicon-star-empty' aria-hidden='true'></span></button>
+						</div>
+					</div>			
+				</div>
+	{% endfor %}
+			</div>
+
+		</div>
+	</ul>
+
+{% endblock %}

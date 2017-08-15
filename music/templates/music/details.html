@@ -1,0 +1,54 @@
+{% extends 'music/base.html' %}
+{% block title %}details{% endblock %}
+
+{% block body %}
+      <div class='container'>
+        <div class='row'>
+        <!-- Left panel   -->
+          <div class='col-md-4'>
+            <div class='panel'>
+              <div class='panel-body' class='panel-default'>
+                <img src='{{ album.album_logo.url }}' class='img-responsive'>
+                <h1>{{ album.album_artist }}</h1>
+                <h3>{{ album.album_title }}</h3>
+                <form action="{% url 'music:album-delete' album.id %}" method="post">
+                {% csrf_token %}  
+                  <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>
+                </form>
+                  <button type="button" class="btn btn-default"><span class='glyphicon  glyphicon-star-empty' aria-hidden='true'></span></button>
+              </div>
+            </div>      
+          </div>
+          
+          <p><button type="button" class="btn btn-primary">View details</button>
+          
+          <a href='#'> &nbsp;Add new song</a>
+          
+          <!-- right panel -->
+          <div class='col-md-8'>
+            <div class='panel panel-default'>
+              <div class='panel-body' class='panel-default'>
+                <h1> All songs </h1>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <td>Title</td>
+                      <td>Audiofile</td>
+                      <td>Favorite</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>      
+          </div></p>
+        </div>
+      </div>
+     
+
+    {% csrf_token %}
+
+
+  
+{% endblock %}
+ 
